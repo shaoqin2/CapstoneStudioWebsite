@@ -30,7 +30,6 @@ ALLOWED_HOSTS = ['121.43.175.60:8000','121.43.175.60']
 # Application definition
 
 INSTALLED_APPS = [
-	'login',
 	'mainsite',
 	'forum',
     'django.contrib.admin',
