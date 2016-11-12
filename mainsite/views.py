@@ -40,18 +40,28 @@ def student_homework(request):
 	
 @login_required(login_url='/login/')	
 def parent_homework_status(request):
-	return HttpResponse("<h1>parent_homework_status</h1>")
+	parent = Parent.objects.get(username=request.user)
+	student = parent.student
+	dict = student.get_homework_status()
+	print(dict)
+	return render(request,'ParentHomeworkStatus.html',dict)
 	
 	
 @login_required(login_url='/login/')
 def parent_homework(request):
-	return HttpResponse("<h1>parent_homework</h1>")
+	parent = Parent.objects.get(username=request.user)
+	student = parent.student
+	dict = student.get_homework()
+	return render(request,'ParentHomework.html',dict)
 	
 	
 	
 @login_required(login_url='/login/')
 def parent_feedback(request):
-	return HttpResponse("<h1>parent_feedback</h1>")
+	parent = Parent.objects.get(username=request.user)
+	student = parent.student
+	dict = student.get_feedback()
+	return render(request,'ParentFeedback.html',dict)
 	
 
 @login_required(login_url='/login/')	

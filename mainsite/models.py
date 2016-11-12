@@ -42,7 +42,17 @@ class Student(models.Model):
 	
 	def get_feedback(self):
 		'''get all feedback to this student'''
-		pass
+		feedback_list =[]
+		for my_feedback in self.related_feedback.order_by('-date')[:10]:
+			feedback = {}
+			feedback['name'] = my_feedback.name
+			feedback['date'] = my_feedback.date
+			feedback['feedback_content'] = my_feedback.feedback_content
+			feedback['for_class'] = my_feedback.for_class
+			feedback_list.append(feedback)
+		feedback_dict = {}
+		feedback_dict['content'] = feedback_list
+		return feedback_dict
 		
 	def get_class(self):
 		'''get all class this student enrolled'''
@@ -50,7 +60,33 @@ class Student(models.Model):
 	
 	def get_homework_status(self):
 		'''get the homework status of this student'''
-		pass
+		ans = {}
+		dict = {}
+		for my_class in self.related_class.all():
+			homeworkstatus_list = []
+			count = 2
+			for class_homework in my_class.related_homework.filter(due_date__lt=date.today()):
+				if not class_homework.report:
+					continue
+				if count < 0:
+					break
+				homework = {}
+				homework['name_chinese'] = class_homework.name_chinese
+				homework['assigned_by'] = class_homework.assigned_by
+				homework['homework_content'] = class_homework.homework_content
+				homework['assign_date'] = class_homework.assign_date
+				homework['due_date'] = class_homework.due_date
+				homework['submission'] = class_homework.submission
+				if self.completed_homework.filter(name_chinese=class_homework.name_chinese).exists():
+					homework['status'] = '已完成'
+				else:
+					homework['status'] = '未完成'
+				count -= 1
+				homeworkstatus_list.append(homework)
+			dict[my_class.name_chinese] = homeworkstatus_list
+		ans['content'] = dict
+		return ans
+					
 		
 class Teacher(models.Model):
 	name_chinese = models.CharField("中文名", max_length = 100)
@@ -85,7 +121,7 @@ class Homework(models.Model):
 	submission = models.CharField('提交方式',max_length=20,choices=submissionChoice,default="Submit by Wechat")
 	
 	
-	completed_student = models.ManyToManyField(Student,blank = True,verbose_name='已完成的学生')
+	completed_student = models.ManyToManyField(Student,blank = True,verbose_name='已完成的学生',related_name='completed_homework')
 	
 	def __str__(self):
 		return str(self.name_chinese)
