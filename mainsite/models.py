@@ -20,7 +20,20 @@ class Student(models.Model):
 	
 	def get_homework(self):
 		'''get all homeworks of classes related to this student'''
-		pass
+		dict = {}
+		for my_class in self.related_class.all():
+			homework_list = []
+			for class_homework in my_class.related_homework.filter(due_date__gte=date.today()):
+				homework = {}
+				homework['name_chinese'] = class_homework.name_chinese
+				homework['assigned_by'] = class_homework.assigned_by
+				homework['homework_content'] = class_homework.homework_content
+				homework['assign_date'] = class_homework.assign_date
+				homework['due_date'] = class_homework.due_date
+				homework['submission'] = class_homework.submission
+				homework_list.append(homework)
+			dict[my_class.name_chinese] = homework_list
+		return dict
 	
 	
 	def get_feedback(self):
