@@ -21,9 +21,13 @@ class Student(models.Model):
 	def get_homework(self):
 		'''get all homeworks of classes related to this student'''
 		dict = {}
+		dict['notification'] = False
+		dict['content'] = {}
 		for my_class in self.related_class.all():
 			homework_list = []
 			for class_homework in my_class.related_homework.filter(due_date__gte=date.today()):
+				if class_homework.due_date == date.today():
+					dict['notification'] = True
 				homework = {}
 				homework['name_chinese'] = class_homework.name_chinese
 				homework['assigned_by'] = class_homework.assigned_by
@@ -32,7 +36,7 @@ class Student(models.Model):
 				homework['due_date'] = class_homework.due_date
 				homework['submission'] = class_homework.submission
 				homework_list.append(homework)
-			dict[my_class.name_chinese] = homework_list
+			dict['content'][my_class.name_chinese] = homework_list
 		return dict
 	
 	
@@ -88,7 +92,7 @@ class Homework(models.Model):
 		
 class Parent(models.Model):
 	name_chinese = models.CharField('中文名', max_length=50)
-	username = models.OneToOneField(User,primary_key=True)
+	username = models.OneToOneField(User,primary_key=True, limit_choices_to = {'is_staff':False})
 	student = models.OneToOneField(Student,verbose_name='对应学生')
 	phone_number = models.CharField(max_length=15, blank=True)
 	email = models.EmailField(blank=True)

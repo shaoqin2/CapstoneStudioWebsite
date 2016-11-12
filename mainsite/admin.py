@@ -10,10 +10,8 @@ class StudentAdmin(admin.ModelAdmin):
 admin.site.register(Student, StudentAdmin)
 
 
-def enroll_num(obj):
-	return str(obj.enrolled_student.objects.count())
 class ClassAdmin(admin.ModelAdmin):
-	list_display = ('name_chinese', 'name', enroll_num,'class_has_end')
+	list_display = ('name_chinese', 'name', 'class_has_end')
 	filter_horizontal = ('enrolled_student','teacher')
 admin.site.register(Class, ClassAdmin)
 
@@ -38,7 +36,7 @@ class HomeworkFilter(admin.SimpleListFilter):
 class HomeworkAdmin(admin.ModelAdmin):
 	list_display = ('name_chinese','belong_to_class','assigned_by','due_date','report','submission')
 	list_filter = (HomeworkFilter,)
-
+	filter_horizontal = ('completed_student',)
 admin.site.register(Homework,HomeworkAdmin)
 
 class FeedBackAdmin(admin.ModelAdmin):
@@ -49,3 +47,5 @@ admin.site.register(Feedback,FeedBackAdmin)
 class ParentAdmin(admin.ModelAdmin):
 	list_display = ('name_chinese','student')
 admin.site.register(Parent,ParentAdmin)
+
+admin.site.register(Teacher)
