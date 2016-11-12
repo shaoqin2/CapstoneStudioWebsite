@@ -7,7 +7,7 @@
 		  <a class="navbar-brand" href="#">Capstone Studio</a>
 		</div>
 		<ul class="nav navbar-nav">
-		  <li class="active"><a href="#">学习反馈<span ></a></li>
+		  <li><a href="/parentpage/feedback">学习反馈<span ></a></li>
 		  <li><a href="/parentpage/homework">今日作业</a></li>
 		  <li><a href="/parentpage/homeworkstatus">作业情况</a></li>
 		  <!--<li><a href="#">Page 3</a></li>-->
@@ -15,7 +15,7 @@
 		
 		<ul class="nav navbar-nav navbar-right">
 			<!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
-			<li><a href="/parentpage/contact"><span class="glyphicon glyphicon-user"></span> 联系我们</a></li>
+			<li class="active"><a href="#"><span class="glyphicon glyphicon-user"></span> 联系我们</a></li>
 			<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>  退出</a></li>
 		</ul>
 	  </div>
@@ -24,10 +24,7 @@
 	<div class="container-fluid"> 
 		
 		<div style="padding-left:20px;">
-            {% for feedback in content %}
-                <text style="font-size:22px; ">{{feedback.date}}, {{feedback.for_class}}  :  {{feedback.name}} : </text>
-                <p style="padding-top:8px; padding-left:50px;">{{feedback.feedback_content|linebreaks}}</p>
-            {% endfor %}
+            <text>唐胖子手机：我也不知道啊！</text>
 		</div>
 		
 	</div>

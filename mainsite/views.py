@@ -84,8 +84,10 @@ def login(request):
 			error = "Please input valid credentials"
 	return render(request,"defaultlogin.html",{"form":form,"error":error})
 	
-
-	
+def student_contact(request):
+	return render(request,'StudentContact.html')
+def parent_contact(request):
+	return render(request,'ParentContact.html')
 def logout(request):
 	LOGOUT(request)
 	return HttpResponseRedirect('/')

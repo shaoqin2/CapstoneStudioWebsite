@@ -25,4 +25,6 @@ urlpatterns = [
 	url(r'^parentpage/homework',views.parent_homework,name = "ParentHomework"),
 	url(r'^parentpage/feedback',views.parent_feedback,name="ParentFeedback"),
 	url(r'^logout/',views.logout,name='Logout'),
+	url(r'^parentpage/contact',views.parent_contact,name='ParentContact'),
+	url(r'^studentpage/contact',views.student_contact,name='StudentContact'),
 ]

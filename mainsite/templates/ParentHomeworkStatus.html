@@ -16,7 +16,7 @@
 		
 		<ul class="nav navbar-nav navbar-right">
 			<!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
-			<li><a href="#"><span class="glyphicon glyphicon-user"></span> 联系我们</a></li>
+			<li><a href="/parentpage/contact"><span class="glyphicon glyphicon-user"></span> 联系我们</a></li>
 			<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>  退出</a></li>
 		</ul>
 	  </div>
@@ -30,21 +30,22 @@
                 
             {% if hw.status == "已完成" %}
             
-            <text style="font-size:20px;" >{{hw.name_chinese}}</text><text style="font-size:22px; color: green;">{{hw.status}}</text>
+            <text style="font-size:20px;" >{{hw.name_chinese}}</text><text style="font-size:22px; color: green;"><b>{{hw.status}}</b></text>
             {% else %}
-            <text style="font-size:20px;">{{hw.name_chinese}}</text><text style="font-size:22px; color: red;">{{hw.status}}</text>
+            <text style="font-size:20px;">{{hw.name_chinese}}</text><text style="font-size:22px; color: red;"><b>{{hw.status}}</b></text>
             {% endif %}
-			<button class='btn-info' data-toggle="collapse" data-target="#{{hw.name_chinese}}" >具体内容</button>
+			<button class='btn btn-sm btn-info' data-toggle="collapse" data-target="#{{hw.name_chinese}}" >具体内容</button>
 
 			<div id="{{hw.name_chinese}}" class="collapse">
 				{{hw.homework_content|linebreaks}}
 			</div>
-            <button class='btn-info'>Test Botton</button>
+            
                     
 			<br>
 			<br>
 			{% endfor %}
 		</div>
 		{% endfor %}
+		
 	</div>
 {% endblock %}
