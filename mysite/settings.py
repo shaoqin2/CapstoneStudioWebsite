@@ -24,7 +24,7 @@ SECRET_KEY = open(os.path.join(BASE_DIR,'mysite/secret.txt'),'r').read()
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['121.43.175.60:8000','121.43.175.60']
+ALLOWED_HOSTS = ['121.43.175.60:8000','121.43.175.60','159.203.139.196']
 
 
 # Application definition
