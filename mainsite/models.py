@@ -46,7 +46,7 @@ class Class(models.Model):
 	name = models.CharField('课程编号', max_length=300)
 	start_date = models.DateField('开课日期', auto_now_add=True)
 	teacher = models.ManyToManyField(Teacher)
-	student_number_cap = models.PositiveSmallIntegerField('学生上限')
+	student_number_cap = models.PositiveSmallIntegerField('学生上限',blank=True)
 	enrolled_student = models.ManyToManyField(Student,related_name="related_class",verbose_name='学生')
 	class_has_end = models.BooleanField('课程结束', default = False)
 	def __str__(self):
@@ -58,16 +58,18 @@ class Homework(models.Model):
 	name_chinese = models.CharField('作业名',max_length=100)
 	assigned_by = models.ForeignKey(Teacher,on_delete=models.CASCADE,related_name = "related_homework",verbose_name='布置老师')
 	belong_to_class = models.ForeignKey(Class,on_delete=models.CASCADE,related_name = "related_homework",verbose_name='所属课程')
-	homework_content = models.TextField(max_length=5000)
-	assign_date = models.DateField()
-	due_date = models.DateField()
+	report = models.BooleanField("反馈给家长？", default = False)
+	homework_content = models.TextField('作业内容',max_length=5000)
+	assign_date = models.DateField('布置日期')
+	due_date = models.DateField('截止日期')
+	
 	
 	submissionChoice = (("Submit by Email","Submit by Email"),("Submit in Person","Submit in Person"),("Submit by Wechat","Submit by Wechat"),("Submit in Class","Submit in Class"),("No need to Submit","No need to Submit"))
-	submission = models.CharField(max_length=20,choices=submissionChoice,default="Submit by Wechat")
+	submission = models.CharField('提交方式',max_length=20,choices=submissionChoice,default="Submit by Wechat")
 	
 	
 	completed_student = models.ManyToManyField(Student,blank = True,verbose_name='已完成的学生')
-	report = models.BooleanField("反馈给家长？", default = False)
+	
 	def __str__(self):
 		return str(self.name_chinese)
 		
