@@ -14,7 +14,6 @@ def home_page(request):
 	
 @login_required(login_url='/login/')
 def parse(request):
-	print (request.user)
 	try:
 		temp = Student.objects.get(username=request.user)
 	except Student.DoesNotExist:
@@ -43,7 +42,6 @@ def parent_homework_status(request):
 	parent = Parent.objects.get(username=request.user)
 	student = parent.student
 	dict = student.get_homework_status()
-	print(dict)
 	return render(request,'ParentHomeworkStatus.html',dict)
 	
 	
