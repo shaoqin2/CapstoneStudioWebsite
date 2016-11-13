@@ -1,0 +1,52 @@
+
+
+
+{% extends "header.html" %}
+
+{% block content %}
+
+<body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <a class="navbar-brand" href="#">Capstone Studio</a>
+		</div>
+		<ul class="nav navbar-nav">
+		  <li class="active"><a href="/studentpage/homework/">Homework<span ></a></li>
+		  <li><a href="#">Forum</a></li>
+		  <!--<li><a href="#">Page 2</a></li>
+		  <li><a href="#">Page 3</a></li>-->
+		</ul>
+		
+		<ul class="nav navbar-nav navbar-right">
+			<!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
+			<li><a href="/studentpage/contact"><span class="glyphicon glyphicon-user"></span> Contact Us</a></li>
+			<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>  Logout</a></li>
+		</ul>
+	  </div>
+	</nav>
+	{% if notification %}
+	<div class="alert alert-danger">
+	  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	  <!-- put the name of clas homework into the alert-->
+	  <strong>Attention!</strong> 今天有作业截止！不要摸鱼了！
+	</div>
+	{% endif %}
+	<div class="container-fluid">
+		{% for key, value in content.items %}
+		<h2> {{ key }} </h2>
+		<div style="padding-left:50px;">
+			{% for hw in value %}
+                <text style="font-size:22px; ">{{hw.name_chinese}}</text>
+                <text style="color:#00d8d8; padding-left:8px;">截止日期：{{hw.due_date}}  <text style="padding-left:15px">{{hw.submission}}</text></text> 
+                <p style="padding-top:8px; padding-left:50px;">{{hw.homework_content|linebreaks}}</p>
+			
+			{% endfor %}
+		</div>
+		{% endfor %}
+	</div>
+	
+
+</body>
+
+{% endblock %}

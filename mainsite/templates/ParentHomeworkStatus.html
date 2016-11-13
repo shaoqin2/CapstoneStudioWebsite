@@ -1,0 +1,51 @@
+{% extends "header.html" %}
+
+{% block content %}
+<body>
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <a class="navbar-brand" href="#">Capstone Studio</a>
+		</div>
+		<ul class="nav navbar-nav">
+		  <li><a href="/parentpage/feedback">学习反馈<span ></a></li>
+		  <li><a href="/parentpage/homework">今日作业</a></li>
+		  <li class="active"><a href="#">作业情况</a></li>
+		  <!--<li><a href="#">Page 3</a></li>-->
+		</ul>
+		
+		<ul class="nav navbar-nav navbar-right">
+			<!--<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
+			<li><a href="/parentpage/contact"><span class="glyphicon glyphicon-user"></span> 联系我们</a></li>
+			<li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span>  退出</a></li>
+		</ul>
+	  </div>
+	</nav>
+	
+	<div class="container-fluid">
+		{% for key, value in content.items %}
+		<h2> {{ key }} </h2>
+		<div style="padding-left:50px;">
+			{% for hw in value %}
+                
+            {% if hw.status == "已完成" %}
+            
+            <text style="font-size:20px;" >{{hw.name_chinese}}</text><text style="font-size:22px; color: green;"><b>{{hw.status}}</b></text>
+            {% else %}
+            <text style="font-size:20px;">{{hw.name_chinese}}</text><text style="font-size:22px; color: red;"><b>{{hw.status}}</b></text>
+            {% endif %}
+			<button class='btn btn-sm btn-info' data-toggle="collapse" data-target="#{{hw.name_chinese}}" >具体内容</button>
+
+			<div id="{{hw.name_chinese}}" class="collapse">
+				{{hw.homework_content|linebreaks}}
+			</div>
+            
+                    
+			<br>
+			<br>
+			{% endfor %}
+		</div>
+		{% endfor %}
+		
+	</div>
+{% endblock %}
