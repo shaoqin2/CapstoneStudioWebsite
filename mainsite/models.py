@@ -99,7 +99,6 @@ class Class(models.Model):
 	name = models.CharField('课程编号', max_length=300)
 	start_date = models.DateField('开课日期', auto_now_add=True)
 	teacher = models.ManyToManyField(Teacher)
-	student_number_cap = models.PositiveSmallIntegerField('学生上限',blank=True)
 	enrolled_student = models.ManyToManyField(Student,related_name="related_class",verbose_name='学生')
 	class_has_end = models.BooleanField('课程结束', default = False)
 	def __str__(self):

@@ -64,7 +64,7 @@ def parent_feedback(request):
 
 @login_required(login_url='/login/')	
 def teacher_page(request):
-	return HttpResponse("<h1>teacher_page</h1>")
+	return HttpResponseRedirect("/admin")
 	
 def login(request):
 	form = forms.loginForm()
