@@ -17,7 +17,6 @@ class Student(models.Model):
 	def __str__(self):
 		return str(self.name_chinese)
 	
-	
 	def get_homework(self):
 		'''get all homeworks of classes related to this student'''
 		dict = {}
@@ -38,7 +37,6 @@ class Student(models.Model):
 				homework_list.append(homework)
 			dict['content'][my_class.name_chinese] = homework_list
 		return dict
-	
 	
 	def get_feedback(self):
 		'''get all feedback to this student'''
@@ -87,7 +85,6 @@ class Student(models.Model):
 		ans['content'] = dict
 		return ans
 					
-		
 class Teacher(models.Model):
 	name_chinese = models.CharField("中文名", max_length = 100)
 	username = models.OneToOneField(User,on_delete=models.CASCADE, limit_choices_to = {'is_staff':True})
@@ -133,31 +130,7 @@ class Parent(models.Model):
 	email = models.EmailField(blank=True)
 	def __str__(self):
 		return str(self.name_chinese)
-	# def getHomeworkStatus(self):
-		# Stu = self.student
-		# dict = {}
-		# every cla is one class the kid has enrolled in
-		# for cla in Stu.enrolledclass.all():
-			# a = []
-			# every hw is one class homework
-			# for hw in cla.classHomework.order_by("-dueDate")[:4]:
-				# print (hw)
-				# homework hasn't due, teacher choose to report and is within 4 items
-				# if hw.dueDate<date.today() and hw.report:
-					# temp = {}
-					# temp["name"] = hw.name
-					# temp["dueDate"] = hw.dueDate
-					# temp["assignedby"] = hw.assignedBy.name_chinese
-					# if Stu in hw.completed.all():
-						# temp["status"] = "Finished"
-					# else:
-						# temp["status"] = "unfinished"
-					# temp["content"] = hw.homeworkContent
-					# a.append(temp)
-			# dict[cla.name_chinese] = a
-		# return dict
-
-		
+	
 class Feedback(models.Model):
 	name = models.CharField('反馈名称',max_length = 200)
 	for_class = models.ForeignKey(Class)
