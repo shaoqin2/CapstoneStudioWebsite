@@ -5,8 +5,8 @@ The access to this website is restricted to students and staff in Capstone Studi
 
 ## Website Domain
 
-Not implemented yet, expect to go live in December.
+Not implemented yet
 
 ## Wechat API
 
-Not yet implemented, expect to go live in December.
+Not yet implemented
